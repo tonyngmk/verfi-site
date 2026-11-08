@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-PI/PXwHfNJXWPyJ3a8xZS8p6o6wGWNPIMic+LHFpwIw=' 'sha256-DB8d13SmBICc+2AXZGHXC3X4aHfZXcRKkbqT8b43fVk=' 'sha256-Um6jNotLfQ6UqfuEW/FgK9rp2+MJzfC5Ji3ptAW9i8M=' 'sha256-Rn2xqNrBOQVb70EjZA+C+wQFJIJYNfq/6G2i9NBJdng=' 'sha256-bbQnQBs7R7n669pLFHWN2JuxSfGrQrntVSp3AEbKCHA=' 'sha256-L+VgeZHUmpJNfkJ0UYj1fujVIkVRV2RB9BNLFGaKNvE=' 'sha256-JXsLXxXnDX5BJX4TyEaZGCQEfH4pqCv1AHS3lOeZDLU=' 'sha256-daEdpEyAJIa8b2VkCqSKcw8PaExcB6Qro80XNes/sHA=' 'sha256-80Qw9IC1ClOyCeVwS31WHZKTdlof5TMwvve5EH9y8BY=' 'sha256-65ox7JTotfn20E0QF6djBIaAejUXwsp98mqHsyna16Q=' 'sha256-54izg/e6yk/iiiAh8HDC+pMXfiiw9ebdInsg20GRJ5c=' 'sha256-T11h+3IaZHCLE4shnHu+/U1FdwvK6Cm0DEEJt3C/1Sk=' 'sha256-L7YhMajtYQbpAXFuu7GLzYA/0sXjjBZNMUFi4kffmsg=' 'sha256-6QYZY35wfnpqWVqNBFDDxP38Oo/TLelBHtFm3Q7Wp/Q=' 'sha256-zZDryQmCFYMkyZ3/jtJ92nPIgyROFTBlCciz7E9UeRc=' 'sha256-P0TMgcfIIjHMsxVwDbb5nwgGmcH78acz03PhWgtmzm0='; style-src 'unsafe-inline' 'self'; font-src 'self'; connect-src 'self'; img-src 'self'; form-action 'none'; base-uri 'none'">
+<head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-PI/PXwHfNJXWPyJ3a8xZS8p6o6wGWNPIMic+LHFpwIw=' 'sha256-DB8d13SmBICc+2AXZGHXC3X4aHfZXcRKkbqT8b43fVk=' 'sha256-Um6jNotLfQ6UqfuEW/FgK9rp2+MJzfC5Ji3ptAW9i8M=' 'sha256-Rn2xqNrBOQVb70EjZA+C+wQFJIJYNfq/6G2i9NBJdng=' 'sha256-bbQnQBs7R7n669pLFHWN2JuxSfGrQrntVSp3AEbKCHA=' 'sha256-L+VgeZHUmpJNfkJ0UYj1fujVIkVRV2RB9BNLFGaKNvE=' 'sha256-JXsLXxXnDX5BJX4TyEaZGCQEfH4pqCv1AHS3lOeZDLU=' 'sha256-daEdpEyAJIa8b2VkCqSKcw8PaExcB6Qro80XNes/sHA=' 'sha256-80Qw9IC1ClOyCeVwS31WHZKTdlof5TMwvve5EH9y8BY=' 'sha256-65ox7JTotfn20E0QF6djBIaAejUXwsp98mqHsyna16Q=' 'sha256-54izg/e6yk/iiiAh8HDC+pMXfiiw9ebdInsg20GRJ5c=' 'sha256-T11h+3IaZHCLE4shnHu+/U1FdwvK6Cm0DEEJt3C/1Sk=' 'sha256-6/Q08S2Y1gQfFGlI5wOJdxe4T5o2qrrl+FRc2bVxftc=' 'sha256-6QYZY35wfnpqWVqNBFDDxP38Oo/TLelBHtFm3Q7Wp/Q=' 'sha256-zZDryQmCFYMkyZ3/jtJ92nPIgyROFTBlCciz7E9UeRc=' 'sha256-P0TMgcfIIjHMsxVwDbb5nwgGmcH78acz03PhWgtmzm0='; style-src 'unsafe-inline' 'self'; font-src 'self'; connect-src 'self'; img-src 'self'; form-action 'none'; base-uri 'none'">
 <meta charset="utf-8">
 <meta name="robots" content="noai, noimageai">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25029,7 +25029,7 @@ var STATIC_BRIEFS = "briefs.json";
     var why = $("pays-why"), unmet = rateGates.length && !rateGates.some(function (g) { return g.met; }) ? rateGates[0] : null, base = b && b.rates.filter(function (r) { return r.section === "base"; })[0];
     if (unmet) why.innerHTML = "Its minimum spend isn’t met on this month, so its bonus rates don’t apply.";
     else if (x.lost > 0.005) why.innerHTML = "<b>" + sgd(x.lost) + "</b> a month goes over its cap, and earns nothing.";
-    else if (base) why.innerHTML = "Spend outside its bonus rates earns <b>" + base.text + "</b>.";
+    else if (base) why.innerHTML = "Spend outside its bonus rates earns <b>" + esc(base.text) + "</b>.";
     else why.textContent = "";
     // Where it earns: every group this month spends in.
     var lanes = (x.lanes || []).filter(function (l) { return l.spend > 0.5; }).sort(function (a, b) { return b.reward - a.reward || b.spend - a.spend; });
@@ -25727,7 +25727,7 @@ var STATIC_BRIEFS = "briefs.json";
     initSearch();
     if (window.SwarmGL) window.SwarmGL.start(p.cards, loadRules, DESIGNS);
   }).catch(function (e) {
-    $("podium").innerHTML = '<p class="note">The picks could not load: ' + e.message + "</p>";
+    $("podium").innerHTML = '<p class="note">The picks could not load: ' + esc(e.message) + "</p>";
   });
 })();
 
